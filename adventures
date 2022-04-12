@@ -1,0 +1,92 @@
+import time
+import random
+
+def print_pause(text):
+    print(text)
+    time.sleep(2)
+    
+def fight(enemy):
+    print_pause("you were attacked by " + enemy)
+    print_pause(" you stood up  and start to fight")
+    
+def play_again(text):
+    play_again = input("Would you like to play again? (y/n)")
+    if play_again == "y":
+        print_pause("restartng game")
+        play_game()
+    elif play_again =="n":
+        print_pause("thanks for playing") 
+
+def cave(weapon, enemy): 
+    print_pause("you chose to enter the house")
+    print_pause("as you entered the cave you found a " + enemy)
+    if weapon == "dagger":
+        fight(enemy)
+        print_pause("mission failed the dagger is way too weak to fight with " +" " + enemy)
+        print_pause("GAME OVER \n")
+        play_again(enemy)
+        print_pause("you were not able to save the people")
+        
+
+    else:
+        fight(enemy)
+        print_pause("wow!!!!! you annihilate the " + enemy+" victory at last")
+        play_again(enemy)
+
+def field():
+    
+    print("field")
+    print_pause("on the ground in the field there are series of weapon you can choose from")
+    print_pause("do you want to another weapon?")
+    response= input("kindly hit y to say yes and n to say no").lower()
+
+    weapon = choose_weapon(response)
+    return weapon
+
+
+def house():
+    print_pause("wow!!! you were going toward the door")
+    print_pause("you knocked at the door")
+    print_pause("the door was opened by a very young man")
+    print_pause("you saw his family eating there dinner")
+    print_pause("you went back to the field")
+     
+def enemy():
+    enemy = ["trolls", "vampires", "warewolves", "witches", "hybrid"]
+    return random.choice(enemy)
+
+def choose_weapon(responds):
+    weapon = ["sword", "axe", "arrow", "Hammer", "Zues Dagger"] 
+    if responds == "y":
+        return random.choice(weapon)  
+    elif responds == "n":
+        return "dagger"    
+
+def intro():
+    print_pause("You find yourself standing in an open field")
+    print_pause ("filled with grass and yellow wildflowers.")
+    print_pause("Rumor has it that a wicked enemy is somewhere around here.")
+    print_pause(" and has been terrifying the nearby village")
+    print_pause("In front of you is a house.")
+    print_pause("To your right is a dark cave.")
+    print_pause("In your hand you hold your trusty (but not very effective) dagger.")
+
+def begin_game(enemy, weapon):
+
+    print_pause("Enter 1 to knock on the door of the house.")
+    print_pause("Enter 2 to peer into the cave.")
+    print_pause("What would you like to do? ")
+    option = input("(Please enter 1 or 2).")
+
+    if option == "1":
+        house()
+    elif option =="2":
+        cave(weapon, enemy)
+    else:
+        begin_game()
+        
+def play_game(): 
+    intro()
+    weapon = field()
+    begin_game(enemy(),weapon)   
+play_game()
